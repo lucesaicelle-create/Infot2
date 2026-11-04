@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>My Goals as a Student</title>
+ <style>
+ /* ========== GLOBAL RESET & BASE ========== */
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+
+ body {
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+ }
+
+ a {
+  text-decoration: none;
+ }
+
+ ul {
+  list-style: none;
+ }
+
+ /* ========== HEADER ========== */
+ header {
+  background: linear-gradient(90deg, #2d3748, #4a5568);
+  color: white;
+  padding: 25px;
+  text-align: center;
+  animation: fadeInDown 0.8s ease-out;
+ }
+
+ header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 1px;
+ }
+
+ /* ========== NAVIGATION ========== */
+ nav {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+ }
+
+ nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 20px;
+ }
+
+ nav ul li {
+  position: relative;
+ }
+
+ nav ul li a {
+  display: inline-block;
+  padding: 16px 22px;
+  color: #4a5568;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+ }
+
+ nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background-color: #2d3748;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+ }
+
+ nav ul li a:hover {
+  color: #2d3748;
+  background-color: #f1f3f4;
+ }
+
+ nav ul li a:hover::after {
+  width: 80%;
+ }
+
+ /* ========== DROPDOWN MENU ========== */
+ .dropdown .dropbtn {
+  cursor: pointer;
+ }
+
+ .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  min-width: 220px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 101;
+ }
+
+ .dropdown-content a {
+  display: block;
+  padding: 14px 20px;
+  color: #4a5568;
+  font-size: 14px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.25s ease;
+ }
+
+ .dropdown-content a:last-child {
+  border-bottom: none;
+ }
+
+ .dropdown-content a:hover {
+  background-color: #e9ecef;
+  padding-left: 25px;
+  color: #2d3748;
+ }
+
+ .dropdown:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+ }
+
+ /* ========== LOGOUT BUTTON ========== */
+ .logout-button {
+  margin-left: auto;
+  background: linear-gradient(90deg, #4a5568, #2d3748);
+  color: white !important;
+  padding: 10px 24px !important;
+  margin: 10px 0 !important;
+  border-radius: 6px;
+  margin-left: 20px !important;
+  transition: all 0.3s ease !important;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+ }
+
+ .logout-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+ }
+
+ .logout-button:hover {
+  background: linear-gradient(90deg, #2d3748, #1a202c);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 55, 72, 0.35);
+ }
+
+ .logout-button:hover::before {
+  left: 100%;
+ }
+
+ /* ========== MAIN SECTION ========== */
+ #section2 {
+  height: 20px;
+  margin: 0;
+  padding: 0;
+ }
+
+ #drop {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 25px;
+  animation: fadeInUp 0.8s ease-out;
+ }
+
+ #drop h2 {
+  text-align: center;
+  color: #2d3748;
+  font-size: 32px;
+  margin-bottom: 10px;
+  position: relative;
+  padding-bottom: 12px;
+ }
+
+ #drop h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #718096, #2d3748);
+  transform: translateX(-50%);
+  border-radius: 2px;
+ }
+
+ #drop > p {
+  text-align: center;
+  color: #4a5568;
+  font-size: 17px;
+  margin-bottom: 40px;
+ }
+
+ /* ========== GOAL GRID ========== */
+ .goal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+  gap: 25px;
+ }
+
+ /* ========== GOAL CARD ========== */
+ .goal-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #e2e8f0;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: cardSlideIn 0.7s ease-out forwards;
+ }
+
+ .goal-card:nth-child(1) { animation-delay: 0.1s; }
+ .goal-card:nth-child(2) { animation-delay: 0.2s; }
+ .goal-card:nth-child(3) { animation-delay: 0.3s; }
+ .goal-card:nth-child(4) { animation-delay: 0.4s; }
+
+ /* Hover Effect */
+ .goal-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(45, 55, 72, 0.15);
+  border-color: #cbd5e0;
+ }
+
+ /* Click ripple effect */
+ .goal-card:active {
+  transform: translateY(-4px) scale(0.98);
+ }
+
+ /* ========== GOAL HEADER ========== */
+ .goal-header {
+  background: linear-gradient(90deg, #4a5568, #2d3748);
+  color: white;
+  padding: 18px 22px;
+  font-size: 18px;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+ }
+
+ /* Shine animation on hover */
+ .goal-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.6s ease;
+ }
+
+ .goal-card:hover .goal-header::before {
+  left: 100%;
+ }
+
+ /* Arrow indicator */
+ .goal-header::after {
+  content: ' ⌄';
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  transition: transform 0.3s ease;
+ }
+
+ .goal-card.active .goal-header::after {
+  transform: translateY(-50%) rotate(180deg);
+ }
+
+ /* ========== GOARD PREVIEW TEXT ========== */
+ .goal-card > p {
+  padding: 20px 22px 10px;
+  color: #2d3748;
+  font-size: 15px;
+  transition: color 0.3s ease;
+ }
+
+ .goal-card:hover > p {
+  color: #4a5568;
+ }
+
+ /* ========== GOAL DETAILS (Expandable) ========== */
+ .goal-details {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 22px;
+  color: #4a5568;
+  font-size: 15px;
+  line-height: 1.8;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateY(-10px);
+  border-top: 1px solid transparent;
+ }
+
+ .goal-details.active {
+  max-height: 300px;
+  padding: 0 22px 22px;
+  opacity: 1;
+  transform: translateY(0);
+  border-top: 1px solid #e2e8f0;
+  margin-top: 10px;
+ }
+
+ /* Bullet icon */
+ .goal-details p::before {
+  content: '▸ ';
+  color: #718096;
+  font-weight: bold;
+ }
+
+ /* ========== FOOTER ========== */
+ footer {
+  background-color: #2d3748;
+  color: #e2e8f0;
+  text-align: center;
+  padding: 25px;
+  margin-top: 60px;
+ }
+
+ footer p {
+  font-size: 14px;
+ }
+
+ .footer-divider {
+  height: 4px;
+  background: linear-gradient(90deg, #718096, #4a5568, #718096);
+  background-size: 200% 100%;
+  animation: gradientMove 4s linear infinite;
+ }
+
+ /* ========== ANIMATIONS ========== */
+ @keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+ }
+
+ @keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+ }
+
+ @keyframes cardSlideIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+ }
+
+ @keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+ }
+
+ /* ========== RESPONSIVE DESIGN ========== */
+ @media (max-width: 768px) {
+  nav ul {
+   flex-direction: column;
+  }
+
+  .logout-button {
+   margin-left: 0;
+   margin-top: 10px !important;
+  }
+
+  .goal-grid {
+   grid-template-columns: 1fr;
+  }
+ }
+ </style>
+</head>
+<body>
+ <header>
+  <h1>Welcome to My Personal Website</h1>
+ </header>
+
+ <nav>
+  <ul>
+   <li><a href="index.html">HOME</a></li>
+   <li class="dropdown">
+    <a href="#" class="dropbtn">ABOUT</a>
+    <div class="dropdown-content">
+     <a href="skills.html">Skills I'm Developing</a>
+     <a href="goals.html">My Goals as a Student</a>
+     <a href="funfacts.html">Fun Facts About Me</a>
+    </div>
+   </li>
+   <li><a href="gallery.html">GALLERY</a></li>
+   <li><a href="contact.html">CONTACT</a></li>
+   <a href="javascript:void(0);" class="logout-button" onclick="confirmLogout()">LOG OUT</a>
+  </ul>
+ </nav>
+
+ <section id="section2"></section>
+
+ <section id="drop">
+  <h2>My Goals as a Student</h2>
+  <p>Here are the dreams and goals I'm wholeheartedly working toward!</p>
+
+  <div class="goal-grid">
+   <!-- Short-Term Goals -->
+   <div class="goal-card" id="card1" onclick="toggleGoalDetails(1)">
+    <div class="goal-header"><strong>🎯 Short-Term Goals</strong></div>
+    <p><strong>Enhancing my web development skills</strong></p>
+    <div class="goal-details" id="goal1-details">
+     <p>With these short-term goals as my guide, I know I’ll grow as a developer and lay a strong foundation for what lies ahead in the tech industry</p>
+    </div>
+   </div>
+
+   <!-- Long-Term Goals -->
+   <div class="goal-card" id="card2" onclick="toggleGoalDetails(2)">
+    <div class="goal-header"><strong>🚀 Long-Term Goals</strong></div>
+    <p><strong>To be a proficient front-end developer</strong></p>
+    <div class="goal-details" id="goal2-details">
+     <p>With these long-term goals in mind, I’m dedicated to growing as a front-end developer, contributing to meaningful projects, and becoming a valuable professional in the tech industry.</p>
+    </div>
+   </div>
+
+   <!-- Personal Development -->
+   <div class="goal-card" id="card3" onclick="toggleGoalDetails(3)">
+    <div class="goal-header"><strong>🌱 Personal Development</strong></div>
+    <p><strong>Investing in Me: A Journey of Growth, Skills, and Self-Improvement</strong></p>
+    <div class="goal-details" id="goal3-details">
+     <p>My goal is to grow into a well-rounded person, ready to face challenges and make a positive difference in every area of my life</p>
+    </div>
+   </div>
+
+   <!-- Career Goals -->
+   <div class="goal-card" id="card4" onclick="toggleGoalDetails(4)">
+    <div class="goal-header"><strong>💼 Career Goals</strong></div>
+    <p><strong>Step into leadership and inspire teams to achieve great things together</strong></p>
+    <div class="goal-details" id="goal4-details">
+     <p>I aspire to step into leadership — guiding teams, delivering successful projects, and shaping thoughtful decisions. I’ll grow by leading whenever I can and learning from every experience along the way</p>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <footer>
+  <p>&copy; 2026 Your Name. All rights reserved.</p>
+ </footer>
+ <div class="footer-divider"></div>
+
+<script>
+ // Toggle individual goal card details with smooth animation
+ function toggleGoalDetails(id) {
+  const details = document.getElementById('goal' + id + '-details');
+  const card = document.getElementById('card' + id);
+  
+  // Close any other open card first (accordion style)
+  document.querySelectorAll('.goal-details').forEach(el => {
+   if (el.id !== 'goal' + id + '-details') {
+    el.classList.remove('active');
+   }
+  });
+  document.querySelectorAll('.goal-card').forEach(el => {
+   if (el.id !== 'card' + id) {
+    el.classList.remove('active');
+   }
+  });
+  
+  // Toggle current card
+  details.classList.toggle('active');
+  card.classList.toggle('active');
+ }
+
+ // Logout function with confirmation
+ function confirmLogout() {
+  const confirmLogout = confirm("Are you sure you want to log out?");
+  if (confirmLogout) {
+   localStorage.removeItem('isLoggedIn');
+   window.location.href = 'login.html';
+  }
+ }
+</script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: 'Trebuchet MS', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(270deg, #2c3e50, #95a5a6, #34495e); /* Cool gray gradient */
+  background-size: 600% 600%;
+  animation: gradientAnimation 12s ease infinite;
+  color: #ffffff;
+}
+
+/* Keyframes for gradient animation */
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Form Container with Entrance Animation */
+.form-container {
+  width: 350px;
+  height: 480px;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  color: #282c34;
+  position: relative;
+  z-index: 1;
+  
+  /* ✨ NEW ANIMATIONS */
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Subtle float effect on hover */
+.form-container:hover {
+  transform: translateY(3px);
+  box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* ✨ Fade In + Slide Up Animation */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-container h2 {
+  margin-bottom: 25px;
+  color: #4a5568; /* ✅ Dark gray instead of orange */
+  font-size: 42px;
+  font-weight: 600;
+  position: relative;
+}
+
+/* Underline animation for heading */
+.form-container h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #718096, #4a5568);
+  transition: all 0.4s ease;
+  transform: translateX(-50%);
+}
+
+.form-container:hover h2::after {
+  width: 60%;
+}
+
+/* Label Styling */
+label {
+  display: block;
+  text-align: left;
+  margin: 8px 0 5px;
+  color: #4a5568;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* Input Field Styling with Focus Animation */
+input[type="text"], 
+input[type="password"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #f7fafc;
+}
+
+input[type="text"]:focus, 
+input[type="password"]:focus {
+  border-color: #718096;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(113, 128, 150, 0.15);
+  transform: scale(1.01);
+}
+
+/* Button Styling with Pulse Animation */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4a5568; /* ✅ Gray instead of orange */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Trebuchet MS', sans-serif;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin: 8px 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+button:hover {
+  background-color: #2d3748; /* Darker gray on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(74, 85, 104, 0.35);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Subtle pulse animation on button */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(74, 85, 104, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(74, 85, 104, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 85, 104, 0); }
+}
+
+button:focus {
+  animation: pulse 1.5s infinite;
+}
+
+/* Error Message Styling */
+#errorMessage {
+  color: #c53030; /* Soft red instead of orange */
+  margin-top: 8px;
+  font-size: 14px;
+  min-height: 20px;
+  transition: opacity 0.3s ease;
+}
+
+/* Show Password Container */
+.show-password {
+  display: flex;
+  align-items: center;
+  margin-top: -5px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #4a5568;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.show-password:hover {
+  color: #2d3748;
+}
+
+.show-password input[type="checkbox"] {
+  margin-right: 6px;
+  cursor: pointer;
+  accent-color: #4a5568;
+}

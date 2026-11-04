@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Gallery - Personal Website</title>
+ <style>
+ /* ========== GLOBAL RESET & BASE ========== */
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+
+ body {
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+ }
+
+ a { text-decoration: none; }
+ ul { list-style: none; }
+ img { max-width: 100%; height: auto; }
+
+ /* ========== HEADER ========== */
+ header {
+  background: linear-gradient(90deg, #2d3748, #4a5568);
+  color: white;
+  padding: 25px;
+  text-align: center;
+  animation: fadeInDown 0.8s ease-out;
+ }
+
+ header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 1px;
+ }
+
+ /* ========== NAVIGATION ========== */
+ nav {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+ }
+
+ nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 20px;
+ }
+
+ nav ul li { position: relative; }
+
+ nav ul li a {
+  display: inline-block;
+  padding: 16px 22px;
+  color: #4a5568;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+ }
+
+ nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background-color: #2d3748;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+ }
+
+ nav ul li a:hover {
+  color: #2d3748;
+  background-color: #f1f3f4;
+ }
+
+ nav ul li a:hover::after {
+  width: 80%;
+ }
+
+ /* ========== DROPDOWN MENU ========== */
+ .dropdown .dropbtn { cursor: pointer; }
+
+ .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%; left: 0;
+  background-color: #ffffff;
+  min-width: 220px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  opacity: 0; transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 101;
+ }
+
+ .dropdown-content a {
+  display: block;
+  padding: 14px 20px;
+  color: #4a5568;
+  font-size: 14px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.25s ease;
+ }
+
+ .dropdown-content a:last-child { border-bottom: none; }
+
+ .dropdown-content a:hover {
+  background-color: #e9ecef;
+  padding-left: 25px;
+  color: #2d3748;
+ }
+
+ .dropdown:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+ }
+
+ /* ========== LOGOUT BUTTON ========== */
+ .logout-button {
+  margin-left: auto;
+  background: linear-gradient(90deg, #4a5568, #2d3748);
+  color: white !important;
+  padding: 10px 24px !important;
+  margin: 10px 0 !important;
+  border-radius: 6px;
+  margin-left: 20px !important;
+  transition: all 0.3s ease !important;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+ }
+
+ .logout-button::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+ }
+
+ .logout-button:hover {
+  background: linear-gradient(90deg, #2d3748, #1a202c);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 55, 72, 0.35);
+ }
+
+ .logout-button:hover::before { left: 100%; }
+
+ /* ========== GALLERY SECTION ========== */
+ #section2 {
+  height: 20px;
+  margin: 0;
+  padding: 0;
+ }
+
+ #gallery {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 25px;
+  animation: fadeInUp 0.8s ease-out;
+ }
+
+ #gallery h2 {
+  text-align: center;
+  color: #2d3748;
+  font-size: 36px;
+  margin-bottom: 10px;
+  position: relative;
+  padding-bottom: 12px;
+ }
+
+ #gallery h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #718096, #2d3748);
+  transform: translateX(-50%);
+  border-radius: 2px;
+ }
+
+ #gallery > p {
+  text-align: center;
+  color: #4a5568;
+  font-size: 17px;
+  margin-bottom: 40px;
+ }
+
+ /* ========== GALLERY GRID ========== */
+ .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+ }
+
+ /* ========== GALLERY ITEM ========== */
+ .gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  transform: translateY(40px);
+  animation: itemFadeInUp 0.7s ease-out forwards;
+  cursor: pointer;
+ }
+
+ /* Stagger animation for each item */
+ .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+ .gallery-item:nth-child(2) { animation-delay: 0.15s; }
+ .gallery-item:nth-child(3) { animation-delay: 0.2s; }
+ .gallery-item:nth-child(4) { animation-delay: 0.25s; }
+ .gallery-item:nth-child(5) { animation-delay: 0.3s; }
+ .gallery-item:nth-child(6) { animation-delay: 0.35s; }
+
+ .gallery-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+ }
+
+ /* Hover Effects */
+ .gallery-item:hover img {
+  transform: scale(1.1);
+ }
+
+ /* Overlay that appears on hover */
+ .gallery-item .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(45, 55, 72, 0.8));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+
+ .gallery-item:hover .overlay {
+  opacity: 1;
+ }
+
+ .gallery-item .overlay-icon {
+  color: white;
+  font-size: 40px;
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+ }
+
+ .gallery-item:hover .overlay-icon {
+  transform: scale(1);
+ }
+
+ /* Image Description */
+ .image-description {
+  padding: 18px;
+  text-align: center;
+  color: #4a5568;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-top: 1px solid #f1f3f4;
+  transition: background-color 0.3s ease;
+ }
+
+ .gallery-item:hover .image-description {
+  background-color: #f8f9fa;
+  color: #2d3748;
+  font-weight: 500;
+ }
+
+ /* ========== LIGHTBOX ========== */
+ .lightbox {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(45, 55, 72, 0.95);
+  animation: fadeIn 0.3s ease;
+ }
+
+ .lightbox-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+ }
+
+ .lightbox.active .lightbox-content {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+ }
+
+ /* Close Button */
+ .close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 45px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1001;
+ }
+
+ .close:hover {
+  color: #ffffff;
+  transform: rotate(90deg);
+ }
+
+ /* Prev/Next Buttons */
+ .prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 35px;
+  font-weight: bold;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  user-select: none;
+  z-index: 1000;
+ }
+
+ .prev {
+  left: 30px;
+ }
+
+ .next {
+  right: 30px;
+ }
+
+ .prev:hover, .next:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-50%) scale(1.15);
+ }
+
+ /* ========== FOOTER ========== */
+ footer {
+  background-color: #2d3748;
+  color: #e2e8f0;
+  text-align: center;
+  padding: 25px;
+  margin-top: 60px;
+ }
+
+ footer p {
+  font-size: 14px;
+ }
+
+ .footer-divider {
+  height: 4px;
+  background: linear-gradient(90deg, #718096, #4a5568, #718096);
+  background-size: 200% 100%;
+  animation: gradientMove 4s linear infinite;
+ }
+
+ /* ========== ANIMATIONS ========== */
+ @keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+ }
+
+ @keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+ }
+
+ @keyframes itemFadeInUp {
+  from { opacity: 0; transform: translateY(40px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+ }
+
+ @keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+ }
+
+ @keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+ }
+
+ /* ========== RESPONSIVE DESIGN ========== */
+ @media (max-width: 768px) {
+  nav ul {
+   flex-direction: column;
+  }
+
+  .logout-button {
+   margin-left: 0;
+   margin-top: 10px !important;
+  }
+
+  .gallery {
+   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+   gap: 20px;
+  }
+
+  .prev, .next {
+   font-size: 25px;
+   padding: 12px 16px;
+  }
+
+  .close {
+   font-size: 35px;
+   right: 20px;
+  }
+ }
+ </style>
+</head>
+<body>
+ <header>
+  <h1>Welcome to My Personal Website</h1>
+ </header>
+
+ <nav>
+  <ul>
+   <li><a href="index.html">HOME</a></li>
+   <li class="dropdown">
+    <a href="#" class="dropbtn">ABOUT</a>
+    <div class="dropdown-content">
+     <a href="skills.html">Skills I'm Developing</a>
+     <a href="goals.html">My Goals as a Student</a>
+     <a href="funfacts.html">Fun Facts About Me</a>
+    </div>
+   </li>
+   <li><a href="gallery.html">GALLERY</a></li>
+   <li><a href="contact.html">CONTACT</a></li>
+   <a href="javascript:void(0);" class="logout-button" onclick="confirmLogout()">LOG OUT</a>
+  </ul>
+ </nav>
+
+ <section id="section2"></section>
+
+ <section id="gallery">
+  <h2>📸 Gallery</h2>
+  <p>Check out some of the images from my random photos </p>
+
+  <div class="gallery">
+   <!-- Item 1 -->
+   <div class="gallery-item" onclick="openLightbox(0)">
+    <img src="/Cat.jpg " alt="Project Image 1" class="thumbnail">
+    <div class="overlay">
+     <div class="overlay-icon">🔍</div>
+    </div>
+    <p class="image-description">A cute cat i see in Pinterest 🐱 </p>
+   </div>
+
+   <!-- Item 2 -->
+   <div class="gallery-item" onclick="openLightbox(1)">
+    <img src="/Girl .jpg " alt="Project Image 2" class="thumbnail">
+    <div class="overlay">
+     <div class="overlay-icon">🔍</div>
+    </div>
+    <p class="image-description">A random photo of Reze smiling the flower 🌷 </p>
+   </div>
+
+   <!-- Item 3 -->
+   <div class="gallery-item" onclick="openLightbox(2)">
+    <img src="/Saakin ang tingin .jpg " alt="Project Image 3" class="thumbnail">
+    <div class="overlay">
+     <div class="overlay-icon">🔍</div>
+    </div>
+    <p class="image-description">I randomly see this image on Pinterest and also i like to put it in here😁 </p>
+   </div>
+
+   <!-- Item 4 -->
+   <div class="gallery-item" onclick="openLightbox(3)">
+    <img src="/Me 1.jpeg " alt="Project Image 4" class="thumbnail">
+    <div class="overlay">
+     <div class="overlay-icon">🔍</div>
+    </div>
+    <p class="image-description">this is me when pimples breaks down 😵 </p>
+   </div>
+
+   <!-- Item 5 -->
+   <div class="gallery-item" onclick="openLightbox(4)">
+    <img src="/Me pic 2.jpg " alt="Project Image 5" class="thumbnail">
+    <div class="overlay">
+     <div class="overlay-icon">🔍</div>
+    </div>
+    <p class="image-description">Me when i put some glasses for styling and get some pics🤓 </p>
+   </div>
+
+   <!-- Item 6 -->
+   <div class="gallery-item" onclick="openLightbox(5)">
+    <img src="/Opss.jpeg " alt="Project Image 6" class="thumbnail">
+    <div class="overlay">
+     <div class="overlay-icon">🔍</div>
+    </div>
+    <p class="image-description">with mr. V 💗 </p>
+   </div>
+  </div>
+ </section>
+
+ <!-- Lightbox -->
+ <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+  <span class="close" onclick="closeLightbox()">&times;</span>
+  <img class="lightbox-content" id="lightboxImage" src="" alt="Enlarged view">
+  <a class="prev" onclick="changeImage(event, -1)">&#10094;</a>
+  <a class="next" onclick="changeImage(event, 1)">&#10095;</a>
+ </div>
+
+ <footer>
+  <p>&copy; 2026 Your Name. All rights reserved.</p>
+ </footer>
+ <div class="footer-divider"></div>
+
+<script>
+let currentImageIndex = 0;
+const images = document.querySelectorAll('.thumbnail');
+
+function openLightbox(index) {
+ currentImageIndex = index;
+ const lightbox = document.getElementById('lightbox');
+ const lightboxImg = document.getElementById('lightboxImage');
+ 
+ lightbox.style.display = 'block';
+ lightboxImg.src = images[currentImageIndex].src;
+ 
+ setTimeout(() => {
+  lightbox.classList.add('active');
+ }, 10);
+ document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(event) {
+ if (event && event.target !== document.querySelector('.lightbox') && event.target !== document.querySelector('.close')) {
+  return;
+ }
+ const lightbox = document.getElementById('lightbox');
+ lightbox.classList.remove('active');
+ 
+ setTimeout(() => {
+  lightbox.style.display = 'none';
+ }, 300);
+ document.body.style.overflow = 'auto';
+}
+
+function changeImage(event, direction) {
+ event.stopPropagation();
+ 
+ currentImageIndex += direction;
+ if (currentImageIndex < 0) {
+  currentImageIndex = images.length - 1;
+ } else if (currentImageIndex >= images.length) {
+  currentImageIndex = 0;
+ }
+ 
+ const lightboxImg = document.getElementById('lightboxImage');
+ lightboxImg.style.opacity = 0;
+ 
+ setTimeout(() => {
+  lightboxImg.src = images[currentImageIndex].src;
+  lightboxImg.style.opacity = 1;
+ }, 200);
+}
+
+function confirmLogout() {
+ const confirmLogout = confirm("Are you sure you want to log out?");
+ if (confirmLogout) {
+  localStorage.removeItem('isLoggedIn');
+  window.location.href = 'login.html';
+ }
+}
+</script>
+</body>
+</html>

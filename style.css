@@ -1,0 +1,575 @@
+
+
+    /* ========================================
+       ✨ MODERN GLASSMORPHISM & CARD STYLES
+       ======================================== */
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ========================================
+       ✨ CUSTOM POP-UP MODAL OVERLAY & BOX
+       ======================================== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(7, 10, 19, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeInOverlay 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .modal-box {
+      position: relative;
+      background: #0f172a;
+      width: 90%;
+      max-width: 380px;
+      border-radius: 20px;
+      padding: 32px 24px 28px 24px;
+      text-align: center;
+      z-index: 10000;
+      opacity: 0;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    /* Color Theme Variants for Modal Glow & Accents */
+    .modal-box.theme-success {
+      box-shadow: 0 20px 50px rgba(16, 185, 129, 0.2), inset 0 1px 0 rgba(52, 211, 153, 0.3);
+    }
+    .modal-box.theme-success::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #10b981, #34d399, #059669);
+    }
+
+    .modal-box.theme-error {
+      box-shadow: 0 20px 50px rgba(239, 68, 68, 0.25), inset 0 1px 0 rgba(248, 113, 113, 0.3);
+    }
+    .modal-box.theme-error::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ef4444, #f87171, #dc2626);
+    }
+
+    .modal-box.theme-warning {
+      box-shadow: 0 20px 50px rgba(245, 158, 11, 0.2), inset 0 1px 0 rgba(251, 191, 36, 0.3);
+    }
+    .modal-box.theme-warning::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #f59e0b, #fbbf24, #d97706);
+    }
+
+    /* Modal Show State Animations */
+    .modal-box.show-success {
+      animation: springPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .modal-box.show-error {
+      animation: errorShake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+    }
+
+    .modal-box.show-warning {
+      animation: warningBounce 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    /* Message Text Styling */
+    .modal-message {
+      font-size: 15px;
+      color: #cbd5e1;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      font-weight: 400;
+      opacity: 0;
+    }
+
+    /* Custom OK Button */
+    .modal-btn {
+      width: 100%;
+      padding: 12px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      opacity: 0;
+      color: #ffffff;
+      border: none;
+      outline: none;
+    }
+
+    .theme-success .modal-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    }
+    .theme-success .modal-btn:hover {
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .theme-error .modal-btn {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+    }
+    .theme-error .modal-btn:hover {
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .theme-warning .modal-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+    }
+    .theme-warning .modal-btn:hover {
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+      transform: translateY(-1px);
+    }
+
+    /* ========================================
+       ✨ HIGH-GRADE CSS KEYFRAME ANIMATIONS
+       ======================================== */
+
+    @keyframes fadeInOverlay {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* 1. SUCCESS: Spring Overshoot Pop */
+    @keyframes springPop {
+      0% {
+        opacity: 0;
+        transform: scale(0.6) translateY(20px);
+      }
+      70% {
+        transform: scale(1.04) translateY(-2px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* 2. ERROR: Snappy Horizontal Shake Effect */
+    @keyframes errorShake {
+      0% {
+        opacity: 0;
+        transform: scale(0.85) translateY(10px);
+      }
+      20% {
+        opacity: 1;
+        transform: scale(1) translateX(-12px);
+      }
+      35% { transform: translateX(10px); }
+      50% { transform: translateX(-7px); }
+      65% { transform: translateX(5px); }
+      80% { transform: translateX(-2px); }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+      }
+    }
+
+    /* 3. WARNING: Gentle Elastic Bounce */
+    @keyframes warningBounce {
+      0% {
+        opacity: 0;
+        transform: scale(0.7) translateY(-15px);
+      }
+      65% {
+        transform: scale(1.05) translateY(3px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* SVG CHECKMARK DRAWING ANIMATION */
+    .checkmark-path {
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+      opacity: 0;
+    }
+
+    .modal-box.show-success .checkmark-path {
+      animation: drawCheckmark 0.45s cubic-bezier(0.65, 0, 0.45, 1) 0.2s forwards;
+    }
+
+    @keyframes drawCheckmark {
+      to {
+        stroke-dashoffset: 0;
+        opacity: 1;
+      }
+    }
+
+    /* SVG Ring Pulse for Success */
+    .modal-box.show-success .icon-ring {
+      animation: ringPulse 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.05s forwards;
+    }
+
+    @keyframes ringPulse {
+      0% { transform: scale(0.3); opacity: 0; }
+      80% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* SVG Cross Pop for Error */
+    .modal-box.show-error .error-icon-svg {
+      animation: crossPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s forwards;
+      transform-origin: center;
+      opacity: 0;
+    }
+
+    @keyframes crossPop {
+      0% {
+        opacity: 0;
+        transform: scale(0.2) rotate(-90deg);
+      }
+      75% {
+        transform: scale(1.15) rotate(10deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    /* SVG Warning Shield Pop */
+    .modal-box.show-warning .warning-icon-svg {
+      animation: warningIconPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s forwards;
+      transform-origin: center;
+      opacity: 0;
+    }
+
+    @keyframes warningIconPop {
+      0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(-10px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* Staggered Text Tracking Reveal */
+    .modal-overlay.show .modal-message {
+      animation: textReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.22s forwards;
+    }
+
+    @keyframes textReveal {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+        letter-spacing: -0.02em;
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: 0em;
+      }
+    }
+
+    /* Staggered Button Fade-Up */
+    .modal-overlay.show .modal-btn {
+      animation: btnFadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    }
+
+    @keyframes btnFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Form Switch Animations */
+    .form-fadeIn {
+      animation: formFade 0.35s ease-out forwards;
+    }
+
+    @keyframes formFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+
+  <!-- Background Ambient Glow Blobs -->
+  <div class="absolute -top-32 -left-32 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-emerald-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+  <!-- Main Glassmorphism Form Card -->
+  <div class="w-full max-w-md glass-card rounded-3xl p-8 relative z-10 form-fadeIn">
+    
+    <!-- Dynamic Title & Header -->
+    <div class="text-center mb-8">
+      <h2 id="formTitle" class="text-3xl font-extrabold text-white tracking-tight">Sign Up</h2>
+      <p id="formSubtitle" class="text-slate-400 text-sm mt-2">Create your account to get started</p>
+    </div>
+
+    <!-- Sign Up Form -->
+    <form id="signupForm" class="space-y-4" onsubmit="handleSignUp(event)" novalidate>
+      <div>
+        <label class="block text-slate-300 text-xs font-semibold uppercase tracking-wider mb-1.5">Username</label>
+        <input type="text" id="signupUsername" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition duration-200" placeholder="e.g. Aicelle">
+      </div>
+
+      <div>
+        <label class="block text-slate-300 text-xs font-semibold uppercase tracking-wider mb-1.5">Password</label>
+        <input type="password" id="signupPassword" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition duration-200" placeholder="Minimum 6 characters">
+      </div>
+
+      <div>
+        <label class="block text-slate-300 text-xs font-semibold uppercase tracking-wider mb-1.5">Confirm Password</label>
+        <input type="password" id="signupConfirmPassword" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition duration-200" placeholder="Repeat your password">
+      </div>
+
+      <button type="submit" class="w-full mt-2 py-3.5 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/30 transition duration-200 active:scale-[0.99]">
+        Create Account
+      </button>
+    </form>
+
+    <!-- Login Form (Hidden by default) -->
+    <form id="loginForm" class="space-y-4 hidden" onsubmit="handleLogin(event)" novalidate>
+      <div>
+        <label class="block text-slate-300 text-xs font-semibold uppercase tracking-wider mb-1.5">Username</label>
+        <input type="text" id="loginUsername" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition duration-200" placeholder="Enter your username">
+      </div>
+
+      <div>
+        <label class="block text-slate-300 text-xs font-semibold uppercase tracking-wider mb-1.5">Password</label>
+        <input type="password" id="loginPassword" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition duration-200" placeholder="Enter your password">
+      </div>
+
+      <div class="flex items-center justify-between text-xs py-1">
+        <label class="flex items-center text-slate-400 cursor-pointer select-none">
+          <input type="checkbox" id="showPassword" onclick="togglePasswordVisibility()" class="rounded border-slate-700 text-indigo-600 focus:ring-indigo-500/30 bg-slate-900 mr-2 w-4 h-4">
+          Show Password
+        </label>
+      </div>
+
+      <button type="submit" class="w-full mt-2 py-3.5 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/30 transition duration-200 active:scale-[0.99]">
+        Log In
+      </button>
+    </form>
+
+    <!-- Form Mode Toggle Footer -->
+    <div class="text-center mt-6 text-sm text-slate-400">
+      <span id="toggleText">Already have an account?</span>
+      <button id="toggleBtn" onclick="switchForm()" class="text-indigo-400 font-semibold hover:text-indigo-300 transition underline-offset-4 hover:underline ml-1 focus:outline-none">
+        Login
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ========================================
+       ✨ CUSTOM MODAL POPUP (SUCCESS / ERROR / WARNING)
+       ======================================== -->
+  <div class="modal-overlay" id="customModalOverlay">
+    <div class="modal-box" id="customModalBox">
+      
+      <!-- Animated SVG Container -->
+      <div id="modalIconContainer" class="flex justify-center items-center mb-4 min-h-[72px]">
+        <!-- Dynamic SVG Inject Target -->
+      </div>
+
+      <!-- Alert Message Text -->
+      <p class="modal-message" id="modalMessage">Notification message details go here.</p>
+
+      <!-- Modal Action Button -->
+      <button class="modal-btn" id="modalCloseBtn" onclick="closeCustomAlert()">Continue</button>
+    </div>
+  </div>
+
+  <!-- ========================================
+       ✨ JAVASCRIPT LOGIC & ANIMATION CONTROLLER
+       ======================================== -->
+  <script>
+    let isSignUp = true;
+
+    // Toggle between Login and Sign Up views
+    function switchForm() {
+      isSignUp = !isSignUp;
+      const title = document.getElementById('formTitle');
+      const subtitle = document.getElementById('formSubtitle');
+      const signupForm = document.getElementById('signupForm');
+      const loginForm = document.getElementById('loginForm');
+      const toggleText = document.getElementById('toggleText');
+      const toggleBtn = document.getElementById('toggleBtn');
+
+      if (isSignUp) {
+        title.textContent = 'Sign Up';
+        subtitle.textContent = 'Create your account to get started';
+        signupForm.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+        toggleText.textContent = 'Already have an account?';
+        toggleBtn.textContent = 'Login';
+      } else {
+        title.textContent = 'Welcome Back';
+        subtitle.textContent = 'Enter your credentials to continue';
+        signupForm.classList.add('hidden');
+        loginForm.classList.remove('hidden');
+        toggleText.textContent = "Don't have an account?";
+        toggleBtn.textContent = 'Sign Up';
+      }
+    }
+
+    // Toggle password visibility for login
+    function togglePasswordVisibility() {
+      const pwdInput = document.getElementById('loginPassword');
+      pwdInput.type = pwdInput.type === 'password' ? 'text' : 'password';
+    }
+
+    // Validation & Handler for Sign Up
+    function handleSignUp(e) {
+      e.preventDefault();
+      const username = document.getElementById('signupUsername').value.trim();
+      const pass = document.getElementById('signupPassword').value;
+      const confirmPass = document.getElementById('signupConfirmPassword').value;
+
+      // Rule 1: Missing Fields (Warning Modal)
+      if (!username || !pass || !confirmPass) {
+        showCustomAlert('Please complete all input fields before proceeding.', 'warning');
+        return;
+      }
+
+      // Rule 2: Password Length (Error Modal)
+      if (pass.length < 6) {
+        showCustomAlert('Password is too short. Please use at least 6 characters.', 'error');
+        return;
+      }
+
+      // Rule 3: Password Mismatch (Error Modal with Shake)
+      if (pass !== confirmPass) {
+        showCustomAlert('Password confirmation does not match. Please check again.', 'error');
+        return;
+      }
+
+      // Success Modal with Animated SVG Checkmark
+      showCustomAlert('Account created successfully! You can now log in.', 'success');
+      
+      // Auto transition to Login screen after modal acknowledgement
+      setTimeout(() => {
+        document.getElementById('loginUsername').value = username;
+        if (isSignUp) switchForm();
+      }, 1400);
+    }
+
+    // Validation & Handler for Login
+    function handleLogin(e) {
+      e.preventDefault();
+      const username = document.getElementById('loginUsername').value.trim();
+      const pass = document.getElementById('loginPassword').value;
+
+      if (!username || !pass) {
+        showCustomAlert('Please enter both your username and password.', 'warning');
+        return;
+      }
+
+      // Simulated validation for invalid credentials
+      if (pass.length < 6) {
+        showCustomAlert('Invalid username or password. Please try again.', 'error');
+        return;
+      }
+
+      // Success Login Modal
+      showCustomAlert(`Welcome back, ${username}! You have successfully logged in.`, 'success');
+    }
+
+    /* ========================================
+       ✨ MODAL CONTROLLER & SVG INJECTOR
+       ======================================== */
+    function showCustomAlert(message, type = 'success') {
+      const overlay = document.getElementById('customModalOverlay');
+      const box = document.getElementById('customModalBox');
+      const msgEl = document.getElementById('modalMessage');
+      const iconContainer = document.getElementById('modalIconContainer');
+
+      msgEl.textContent = message;
+
+      // Clean up previous themes and animation classes
+      box.className = 'modal-box';
+
+      // Inject appropriate SVG icon and trigger CSS classes
+      if (type === 'success') {
+        box.classList.add('theme-success', 'show-success');
+        iconContainer.innerHTML = `
+          <svg class="w-16 h-16 icon-ring" viewBox="0 0 60 60" fill="none">
+            <circle cx="30" cy="30" r="28" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="2"/>
+            <path class="checkmark-path" d="M18 30L26 38L42 22" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>`;
+      } else if (type === 'error') {
+        box.classList.add('theme-error', 'show-error');
+        iconContainer.innerHTML = `
+          <svg class="w-16 h-16 error-icon-svg" viewBox="0 0 60 60" fill="none">
+            <circle cx="30" cy="30" r="28" fill="#ef4444" fill-opacity="0.15" stroke="#ef4444" stroke-width="2"/>
+            <path d="M20 20L40 40M40 20L20 40" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
+          </svg>`;
+      } else if (type === 'warning') {
+        box.classList.add('theme-warning', 'show-warning');
+        iconContainer.innerHTML = `
+          <svg class="w-16 h-16 warning-icon-svg" viewBox="0 0 60 60" fill="none">
+            <circle cx="30" cy="30" r="28" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="2"/>
+            <path d="M30 18V34" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="30" cy="42" r="2.5" fill="#f59e0b"/>
+          </svg>`;
+      }
+
+      // Reset animation timeline
+      overlay.classList.remove('show');
+      void box.offsetWidth; // Force Reflow
+      overlay.classList.add('show');
+    }
+
+    function closeCustomAlert() {
+      const overlay = document.getElementById('customModalOverlay');
+      const box = document.getElementById('customModalBox');
+
+      overlay.classList.remove('show');
+      box.className = 'modal-box';
+    }
+
+    // Dismiss modal on overlay backdrop click
+    document.getElementById('customModalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeCustomAlert();
+      }
+    });
+
+    // Dismiss on Escape keypress
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeCustomAlert();
+      }
+    });
+  </script>
+</body>
+</html>
+```

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Login & Sign Up Page</title>
+ <style>
+ /* 🌟 COOL SUCCESS ANIMATION (Pop & Spring Bounce) */
+@keyframes successPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.4) rotate(-5deg);
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.08) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+}
+
+/* ❌ COOL ERROR ANIMATION (Shake Effect) */
+@keyframes errorShake {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  15%, 45%, 75% { transform: translate(-55%, -50%) scale(1); }
+  30%, 60%, 90% { transform: translate(-45%, -50%) scale(1); }
+}
+
+/* 💬 MESSAGE & ICON TEXT ANIMATIONS */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes iconPulse {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+ /* Basic Reset */
+ * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+ }
+
+ /* Body Styling */
+ body {
+   font-family: 'Trebuchet MS', sans-serif;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   min-height: 100vh;
+   margin: 0;
+   background: linear-gradient(270deg, #374151, #9ca3af, #1f2937);
+   background-size: 600% 600%;
+   animation: gradientAnimation 12s ease infinite;
+   color: #ffffff;
+   padding: 20px;
+ }
+
+ /* Keyframes for gradient animation */
+ @keyframes gradientAnimation {
+   0% { background-position: 0% 50%; }
+   50% { background-position: 100% 50%; }
+   100% { background-position: 0% 50%; }
+ }
+
+ /* Form Container with Entrance Animation */
+ .form-container {
+   width: 350px;
+   max-width: 100%;
+   padding: 30px;
+   background-color: #ffffff;
+   border-radius: 12px;
+   box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+   text-align: center;
+   color: #1f2937;
+   position: relative;
+   z-index: 1;
+   
+   /* ✨ Animations */
+   animation: fadeInUp 0.8s ease-out forwards;
+   opacity: 0;
+   transform: translateY(30px);
+   transition: transform 0.4s ease, box-shadow 0.4s ease;
+ }
+
+ /* Subtle float effect on hover */
+ .form-container:hover {
+   transform: translateY(-5px);
+   box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.2);
+ }
+
+ /* ✨ Fade In + Slide Up Animation */
+ @keyframes fadeInUp {
+   to {
+     opacity: 1;
+     transform: translateY(0);
+   }
+ }
+
+ /* ✨ Form Switch Animation */
+ .form-content {
+   transition: opacity 0.3s ease, transform 0.3s ease;
+ }
+
+ .form-content.switching {
+   opacity: 0;
+   transform: translateY(-10px);
+ }
+
+ .form-container h2 {
+   margin-bottom: 25px;
+   color: #4b5563;
+   font-size: 40px;
+   font-weight: 600;
+   position: relative;
+   transition: all 0.3s ease;
+ }
+
+ /* Underline animation for heading */
+ .form-container h2::after {
+   content: '';
+   position: absolute;
+   bottom: -8px;
+   left: 50%;
+   width: 0;
+   height: 3px;
+   background: linear-gradient(90deg, #6b7280, #374151);
+   transition: all 0.4s ease;
+   transform: translateX(-50%);
+ }
+
+ .form-container:hover h2::after {
+   width: 60%;
+ }
+
+ /* Label Styling */
+ label {
+   display: block;
+   text-align: left;
+   margin: 10px 0 5px;
+   color: #4b5563;
+   font-size: 15px;
+   font-weight: 500;
+   transition: color 0.3s ease;
+ }
+
+ /* Input Field Styling with Focus Animation */
+ input[type="text"], 
+ input[type="password"] {
+   width: 100%;
+   padding: 12px 15px;
+   margin-bottom: 8px;
+   border: 2px solid #d1d5db;
+   border-radius: 8px;
+   outline: none;
+   font-size: 16px;
+   transition: all 0.3s ease;
+   background-color: #f9fafb;
+ }
+
+ input[type="text"]:focus, 
+ input[type="password"]:focus {
+   border-color: #6b7280;
+   background-color: #ffffff;
+   box-shadow: 0 0 0 4px rgba(107, 114, 128, 0.15);
+   transform: scale(1.01);
+ }
+
+ /* Button Styling */
+ button {
+   width: 100%;
+   padding: 13px;
+   background-color: #4b5563;
+   color: #ffffff;
+   border: none;
+   border-radius: 8px;
+   cursor: pointer;
+   font-size: 16px;
+   font-family: 'Trebuchet MS', sans-serif;
+   font-weight: 600;
+   transition: all 0.3s ease;
+   margin: 10px 0;
+   position: relative;
+   overflow: hidden;
+ }
+
+ button:hover {
+   background-color: #374151;
+   transform: translateY(-2px);
+   box-shadow: 0 6px 20px rgba(75, 85, 99, 0.35);
+ }
+
+ button:active {
+   transform: translateY(0);
+ }
+
+ /* Pulse animation */
+ @keyframes pulse {
+   0% { box-shadow: 0 0 0 0 rgba(75, 85, 99, 0.4); }
+   70% { box-shadow: 0 0 0 10px rgba(75, 85, 99, 0); }
+   100% { box-shadow: 0 0 0 0 rgba(75, 85, 99, 0); }
+ }
+
+ button:focus {
+   animation: pulse 1.5s infinite;
+ }
+
+ /* Error & Message Styling */
+ #errorMessage {
+   color: #dc2626;
+   margin-top: 5px;
+   font-size: 14px;
+   min-height: 20px;
+   transition: opacity 0.3s ease;
+ }
+
+ #passwordMatchMessage {
+   font-size: 13px;
+   margin: 5px 0 10px;
+   transition: all 0.3s ease;
+   min-height: 18px;
+ }
+
+ /* Show Password Container */
+ .show-password {
+   display: flex;
+   align-items: center;
+   margin-top: 5px;
+   margin-bottom: 10px;
+   font-size: 14px;
+   color: #4b5563;
+   cursor: pointer;
+   transition: all 0.3s ease, opacity 0.4s ease;
+   opacity: 1;
+ }
+
+ .show-password:hover {
+   color: #1f2937;
+ }
+
+ .show-password input[type="checkbox"] {
+   margin-right: 6px;
+   cursor: pointer;
+   accent-color: #4b5563;
+ }
+
+ /* Toggle Text */
+ #toggleText {
+   margin-top: 15px;
+   font-size: 14px;
+   color: #6b7280;
+   transition: color 0.3s ease;
+ }
+
+ #toggleText a {
+   color: #374151;
+   text-decoration: none;
+   font-weight: 600;
+   position: relative;
+   transition: color 0.3s ease;
+ }
+
+ #toggleText a::after {
+   content: '';
+   position: absolute;
+   bottom: -2px;
+   left: 0;
+   width: 0;
+   height: 2px;
+   background-color: #374151;
+   transition: width 0.3s ease;
+ }
+
+ #toggleText a:hover {
+   color: #1f2937;
+ }
+
+ #toggleText a:hover::after {
+   width: 100%;
+ }
+
+ /* Hidden elements smooth transition */
+ .hidden-field {
+   opacity: 0;
+   height: 0;
+   overflow: hidden;
+   transition: all 0.3s ease;
+ }
+
+ .visible-field {
+   opacity: 1;
+   height: auto;
+ }
+ </style>
+</head>
+<body>
+ <div class="form-container">
+  <div class="form-content">
+   <h2 id="formTitle">Login</h2>
+   <form id="authForm">
+    <label for="username">Username</label>
+    <input type="text" id="username" required>
+    
+    <label for="password">Password</label>
+    <input type="password" id="password" required>
+    
+    <!-- Show Password Checkbox -->
+    <div class="show-password" id="showPasswordContainer">
+     <input type="checkbox" id="showPassword" onclick="togglePasswordVisibility()">
+     <label for="showPassword">Show Password</label>
+    </div>
+    
+    <!-- Confirm password field for sign-up -->
+    <div id="confirmPasswordWrapper" class="hidden-field">
+     <label for="confirmPassword" id="confirmPasswordLabel">Confirm Password</label>
+     <input type="password" id="confirmPassword">
+     <p id="passwordMatchMessage"></p>
+    </div>
+    
+    <button type="button" onclick="handleSubmit()">Login</button>
+    <p id="errorMessage"></p>
+    
+    <p id="toggleText">Don't have an account? <a href="#" onclick="toggleForm(); return false;">Sign Up</a></p>
+   </form>
+  </div>
+ </div>
+
+ <script>
+ let isLogin = true;
+
+ function toggleForm() {
+  const formContent = document.querySelector('.form-content');
+  const formTitle = document.getElementById('formTitle');
+  const confirmPassword = document.getElementById('confirmPassword');
+  const confirmPasswordLabel = document.getElementById('confirmPasswordLabel');
+  const confirmPasswordWrapper = document.getElementById('confirmPasswordWrapper');
+  const submitButton = document.querySelector('button');
+  const toggleText = document.getElementById('toggleText');
+  const showPasswordContainer = document.getElementById('showPasswordContainer');
+  
+  // ✨ Add switching animation
+  formContent.classList.add('switching');
+  
+  // Clear form fields
+  document.getElementById('authForm').reset();
+  document.getElementById('errorMessage').textContent = '';
+  document.getElementById('passwordMatchMessage').textContent = '';
+  
+  setTimeout(() => {
+   if (isLogin) {
+    // Switch to Sign-Up
+    formTitle.textContent = 'Sign Up';
+    confirmPasswordWrapper.classList.remove('hidden-field');
+    confirmPasswordWrapper.classList.add('visible-field');
+    submitButton.textContent = 'Sign Up';
+    toggleText.innerHTML = 'Already have an account? <a href="#" onclick="toggleForm(); return false;">Login</a>';
+    showPasswordContainer.style.opacity = '0';
+    showPasswordContainer.style.position = 'absolute';
+    isLogin = false;
+   } else {
+    // Switch to Login
+    formTitle.textContent = 'Login';
+    confirmPasswordWrapper.classList.remove('visible-field');
+    confirmPasswordWrapper.classList.add('hidden-field');
+    submitButton.textContent = 'Login';
+    toggleText.innerHTML = 'Don\'t have an account? <a href="#" onclick="toggleForm(); return false;">Sign Up</a>';
+    showPasswordContainer.style.opacity = '1';
+    showPasswordContainer.style.position = 'relative';
+    isLogin = true;
+   }
+   
+   // ✨ Fade content back in
+   formContent.classList.remove('switching');
+  }, 300);
+ }
+
+ function handleSubmit() {
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  const errorMessage = document.getElementById('errorMessage');
+  
+  if (isLogin) {
+   const storedUsername = localStorage.getItem('username');
+   const storedPassword = localStorage.getItem('password');
+   
+   if (username === storedUsername && password === storedPassword) {
+    alert('✅ Welcome! Successfully logged in.');
+    window.location.href = 'index.html';
+   } else {
+    errorMessage.textContent = '❌ Invalid username or password';
+   }
+  } else {
+   const confirmPassword = document.getElementById('confirmPassword').value;
+   
+   if (password !== confirmPassword) {
+    errorMessage.textContent = '❌ Passwords do not match';
+   } else if (!username || !password) {
+    errorMessage.textContent = '❌ Please fill out all fields';
+   } else if (password.length < 4) {
+    errorMessage.textContent = '❌ Password must be at least 4 characters';
+   } else {
+    localStorage.setItem('username', username);
+    localStorage.setItem('password', password);
+    alert('✅ Account created successfully! You can now log in.');
+    toggleForm();
+   }
+  }
+ }
+
+ function togglePasswordVisibility() {
+  const passwordField = document.getElementById('password');
+  passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+ }
+
+ document.getElementById('confirmPassword').addEventListener('input', checkPasswordMatch);
+ 
+ function checkPasswordMatch() {
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+  const message = document.getElementById('passwordMatchMessage');
+  
+  if (confirmPassword === "") {
+   message.textContent = "";
+   message.style.display = 'none';
+  } else if (confirmPassword === password) {
+   message.textContent = '✅ Passwords match';
+   message.style.color = '#16a34a';
+   message.style.display = 'block';
+  } else {
+   message.textContent = '❌ Passwords do not match';
+   message.style.color = '#dc2626';
+   message.style.display = 'block';
+  }
+ }
+ </script>
+</body>
+</html>

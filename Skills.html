@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Skills I'm Developing</title>
+ <style>
+ /* ========== GLOBAL RESET & BASE ========== */
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+
+ body {
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+ }
+
+ a {
+  text-decoration: none;
+ }
+
+ ul {
+  list-style: none;
+ }
+
+ /* ========== HEADER ========== */
+ header {
+  background: linear-gradient(90deg, #2d3748, #4a5568);
+  color: white;
+  padding: 25px;
+  text-align: center;
+  animation: fadeInDown 0.8s ease-out;
+ }
+
+ header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 1px;
+ }
+
+ /* ========== NAVIGATION ========== */
+ nav {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+ }
+
+ nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 20px;
+ }
+
+ nav ul li {
+  position: relative;
+ }
+
+ nav ul li a {
+  display: inline-block;
+  padding: 16px 22px;
+  color: #4a5568;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+ }
+
+ /* Nav link hover animation */
+ nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background-color: #2d3748;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+ }
+
+ nav ul li a:hover {
+  color: #2d3748;
+  background-color: #f1f3f4;
+ }
+
+ nav ul li a:hover::after {
+  width: 80%;
+ }
+
+ /* ========== DROPDOWN MENU ========== */
+ .dropdown .dropbtn {
+  cursor: pointer;
+ }
+
+ .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  min-width: 220px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 101;
+ }
+
+ .dropdown-content a {
+  display: block;
+  padding: 14px 20px;
+  color: #4a5568;
+  font-size: 14px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.25s ease;
+ }
+
+ .dropdown-content a:last-child {
+  border-bottom: none;
+ }
+
+ .dropdown-content a:hover {
+  background-color: #e9ecef;
+  padding-left: 25px;
+  color: #2d3748;
+ }
+
+ .dropdown:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+ }
+
+ /* ========== LOGOUT BUTTON ========== */
+ .logout-button {
+  margin-left: auto;
+  background: linear-gradient(90deg, #4a5568, #2d3748);
+  color: white !important;
+  padding: 10px 24px !important;
+  margin: 10px 0 !important;
+  border-radius: 6px;
+  margin-left: 20px !important;
+  transition: all 0.3s ease !important;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+ }
+
+ .logout-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+ }
+
+ .logout-button:hover {
+  background: linear-gradient(90deg, #2d3748, #1a202c);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 55, 72, 0.35);
+ }
+
+ .logout-button:hover::before {
+  left: 100%;
+ }
+
+ /* ========== MAIN SECTIONS ========== */
+ section {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 25px;
+  animation: fadeInUp 0.8s ease-out;
+ }
+
+ #section2 {
+  height: 20px;
+  margin: 0;
+  padding: 0;
+ }
+
+ #drop h2 {
+  text-align: center;
+  color: #2d3748;
+  font-size: 30px;
+  margin-bottom: 15px;
+  position: relative;
+  padding-bottom: 12px;
+ }
+
+ #drop h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #718096, #2d3748);
+  transform: translateX(-50%);
+  border-radius: 2px;
+ }
+
+ #drop > p {
+  text-align: center;
+  color: #4a5568;
+  font-size: 17px;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  line-height: 1.8;
+ }
+
+ /* ========== TABS STYLING ========== */
+ #skills {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  overflow: hidden;
+ }
+
+ /* Tab buttons container */
+ .tab {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 25px;
+ }
+
+ /* Tab buttons */
+ .tab button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 15px 22px;
+  transition: all 0.3s ease;
+  font-size: 15px;
+  font-weight: 500;
+  color: #718096;
+  position: relative;
+  top: 3px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin-right: 5px;
+ }
+
+ /* Tab button hover animation */
+ .tab button:hover {
+  color: #2d3748;
+  background-color: #f7fafc;
+  top: 0;
+ }
+
+ /* Active tab button */
+ .tab button.active {
+  color: #2d3748;
+  background-color: #edf2f7;
+  top: 0;
+  font-weight: 600;
+ }
+
+ /* Active tab bottom border animation */
+ .tab button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #718096, #2d3748);
+  animation: stretchBorder 0.4s ease forwards;
+ }
+
+ /* ========== TAB CONTENT ========== */
+ .tabcontent {
+  display: none;
+  animation: fadeIn 0.5s ease;
+  padding: 10px 0;
+ }
+
+ .tabcontent h3 {
+  color: #2d3748;
+  font-size: 22px;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e2e8f0;
+ }
+
+ .tabcontent ul {
+  padding-left: 10px;
+ }
+
+ .tabcontent ul li {
+  padding: 10px 0 10px 30px;
+  position: relative;
+  color: #4a5568;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #f7fafc;
+ }
+
+ .tabcontent ul li:last-child {
+  border-bottom: none;
+ }
+
+ /* Custom bullet point with animation */
+ .tabcontent ul li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #718096;
+  font-weight: bold;
+  font-size: 20px;
+  transition: transform 0.3s ease;
+ }
+
+ .tabcontent ul li:hover {
+  color: #2d3748;
+  padding-left: 35px;
+ }
+
+ .tabcontent ul li:hover::before {
+  transform: translateX(5px);
+  color: #2d3748;
+ }
+
+ .tabcontent strong {
+  color: #2d3748;
+  background-color: #edf2f7;
+  padding: 2px 8px;
+  border-radius: 4px;
+ }
+
+ /* ========== FOOTER ========== */
+ footer {
+  background-color: #2d3748;
+  color: #e2e8f0;
+  text-align: center;
+  padding: 25px;
+  margin-top: 60px;
+ }
+
+ footer p {
+  font-size: 14px;
+ }
+
+ .footer-divider {
+  height: 4px;
+  background: linear-gradient(90deg, #718096, #4a5568, #718096);
+  background-size: 200% 100%;
+  animation: gradientMove 4s linear infinite;
+ }
+
+ /* ========== ANIMATIONS ========== */
+ @keyframes fadeInDown {
+  from {
+   opacity: 0;
+   transform: translateY(-20px);
+  }
+  to {
+   opacity: 1;
+   transform: translateY(0);
+  }
+ }
+
+ @keyframes fadeInUp {
+  from {
+   opacity: 0;
+   transform: translateY(20px);
+  }
+  to {
+   opacity: 1;
+   transform: translateY(0);
+  }
+ }
+
+ @keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+ }
+
+ @keyframes stretchBorder {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+ }
+
+ @keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+ }
+
+ /* ========== RESPONSIVE DESIGN ========== */
+ @media (max-width: 768px) {
+  nav ul {
+   flex-direction: column;
+  }
+
+  .logout-button {
+   margin-left: 0;
+   margin-top: 10px !important;
+  }
+
+  .tab {
+   flex-direction: column;
+  }
+
+  .tab button {
+   width: 100%;
+   text-align: left;
+   padding: 12px 20px;
+   border-radius: 0;
+   border-left: 3px solid transparent;
+  }
+
+  .tab button.active::after {
+   display: none;
+  }
+
+  .tab button.active {
+   border-left-color: #2d3748;
+  }
+ }
+ </style>
+</head>
+<body>
+ <header>
+  <h1>Representing My Personal Website</h1>
+ </header>
+
+ <nav>
+  <ul>
+   <li><a href="index.html">HOME</a></li>
+   <li class="dropdown">
+    <a href="#" class="dropbtn">ABOUT</a>
+    <div class="dropdown-content">
+     <a href="skills.html"> Skills I'm Developing </a>
+     <a href="goals.html">My Goals as a Student</a>
+     <a href="funfacts.html">Fun Facts About Me</a>
+    </div>
+   </li>
+   <li><a href="gallery.html">GALLERY</a></li>
+   <li><a href="contact.html">CONTACT</a></li>
+   <a href="javascript:void(0);" class="logout-button" onclick="confirmLogout()">LOG OUT</a>
+  </ul>
+ </nav>
+
+ <section id="section2"></section>
+
+ <section id="drop">
+  <h2>Skills I'm Developing</h2>
+  <p>"As an IT student, I’m learning programming, web development, and more. I love learning by doing — turning ideas into useful digital projects."</p>
+ 
+  <section id="skills">
+   <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'IT')">Information Technology</button>
+    <button class="tablinks" onclick="openTab(event, 'GraphicDesign')">Graphic Design</button>
+    <button class="tablinks" onclick="openTab(event, 'PublicSpeaking')">Public Speaking</button>
+    <button class="tablinks" onclick="openTab(event, 'ProblemSolving')">Problem Solving</button>
+   </div>
+ 
+   <div id="IT" class="tabcontent">
+    <h3>Information Technology</h3>
+    <ul>
+     <li>learning the web development with <strong>HTML, CSS, and JavaScript</strong></li>
+     <li>Learning <strong>responsive design</strong> "To craft intuitive, accessible experiences that shine across all devices."</li>
+     <li>Creating modern and accessible web interfaces</li>
+    </ul>
+   </div>
+ 
+   <div id="GraphicDesign" class="tabcontent" style="display:none;">
+    <h3>Graphic Design</h3>
+    <ul>
+     <li>Exploring visual design with tools like <strong>"Exploring tools like code editors, design software, and frameworks</strong></li>
+     <li>Growing my skills in branding, layout, and digital illustration to craft designs that tell a story</li>
+     <li>Bridging design and development to create a seamless, cohesive digital presence</li>
+    </ul>
+   </div>
+ 
+   <div id="Painting " class="tabcontent" style="display:none;">
+    <h3>Painting </h3>
+    <ul>
+     <li>Growing by improving my drawing skills </li>
+     <li>Showing my emotions by creating an art </li>
+     <li>Building the skill to express my thought and understand myself </li>
+    </ul>
+   </div>
+ 
+   <div id="ProblemSolving" class="tabcontent" style="display:none;">
+    <h3>Problem Solving and Critical Thinking</h3>
+    <ul>
+     <li>Building stronger analytical skills by solving coding problems and creating real projects</li>
+     <li>Building smarter web projects by focusing on efficient solutions and well-optimized workflows</li>
+     <li>Learning to approach complex problems with structure, logic, and purpose</li>
+    </ul>
+   </div>
+  </section>
+ </section>
+
+ <footer>
+  <p>&copy; 2026 Your Name. All rights reserved.</p>
+ </footer>
+ <div class="footer-divider"></div>
+
+<script>
+function openTab(evt, tabName) {
+ const tabcontents = document.getElementsByClassName("tabcontent");
+ for (let i = 0; i < tabcontents.length; i++) {
+  tabcontents[i].style.display = "none";
+ }
+ 
+ const tablinks = document.getElementsByClassName("tablinks");
+ for (let i = 0; i < tablinks.length; i++) {
+  tablinks[i].classList.remove("active");
+ }
+ 
+ document.getElementById(tabName).style.display = "block";
+ evt.currentTarget.classList.add("active");
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+ document.querySelector('.tablinks').click();
+});
+
+function confirmLogout() {
+ const confirmLogout = confirm("Are you sure you want to log out?");
+ if (confirmLogout) {
+  localStorage.removeItem('isLoggedIn');
+  window.location.href = 'login.html';
+ }
+}
+</script>
+</body>
+</html>
